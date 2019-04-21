@@ -1,13 +1,7 @@
 #!/usr/bin/python
-import pickle
-import os
-import time
+import sys
+sys.path.append('./')
+from CharAnimePlayer import *
 
-with open('./frames.dat', 'rb') as f:
-    frameList = pickle.load(f)
-    for frame in frameList:            
-        os.system("clear")
-        print(frame)
-        time.sleep(0.1)
-
-os.system("clear")
+player = CharAnimePlayer('./frames.dat',10)
+player.play()
