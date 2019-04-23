@@ -3,5 +3,5 @@ import sys
 sys.path.append('./')
 from CharAnimePlayer import *
 
-player = CharAnimePlayer('./frames.dat',10)
+player = CharAnimePlayer.newFramesPlayer('./frames2.dat',10)
 player.play()

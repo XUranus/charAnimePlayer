@@ -5,6 +5,8 @@
 python jinitaimei.py
 ```
 
+目录下`frames2.dat`,`frames.dat`是转化完的两组样例
+
 ![](demo.gif)
 
 ## 有关字符动画的制作
@@ -24,7 +26,7 @@ from CharAnimeBuilder import *
 from CharAnimePlayer import *
 ```
 
-然后构造灰度字符串
+然后构造灰度字符串，字符串的选取涉及到最后的效果
 ```python
 a =  "@@@@@@@@@*abcdefghijklmnopqrstuvwxyz<>()\/{}[]?   
 ```
@@ -36,16 +38,30 @@ builder = CharAnimeBuilder(a,'ikun.mp4')
 
 输入宽高,目标持久化文件路径
 ```python
-builder.build(130,40,'./f.dat')
+builder.build(130,40,'./frames.dat')
 ```
 
 此时同目录下已经出现了`f.dat`文件，加载持久化文件,设置帧率(1-60),初始化播放器
 ```python
-player = CharAnimePlayer('./f.dat',10)
+player = CharAnimePlayer.newFramesPlayer('./frames2.dat',20)
 ```
 最后播放
 ```python
 player.play()
 ```
 
-在linux下测试通过，windows可能有些地方要改改
+### 即时播放
+一边转化，一边播放
+
+shell
+```shell
+python CharAnimePlayer.py [movie] [fps] [width] [height]
+```
+
+python
+```python
+CharAnimePlayer.newRawPlayer(filename,fps,width,height))
+player.play()
+```
+
+在linux下测试通过，windows可能有些地方要改改(比如路径)

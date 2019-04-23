@@ -6,14 +6,14 @@ from CharAnimePlayer import *
 
 
 #构造灰度字符串
-a =  "@@@@@@@@@*abcdefghijklmnopqrstuvwxyz<>()\/{}[]?                                          "
+a =  "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'.                     "
 #构造builder 传入视频
-builder = CharAnimeBuilder(a,'/home/xuranus/Desktop/ikun/ikun.mp4') 
+builder = CharAnimeBuilder(a,'/home/xuranus/Desktop/ikun/kun.mp4') 
 #输入宽高 目标持久化文件
-builder.build(130,40,'./f.dat')
+builder.build(130,40,'./frames2.dat')
 
 
 #加载持久化文件 设置帧率(1-60) 初始化播放器
-player = CharAnimePlayer('./f.dat',10)
+player = CharAnimePlayer.newFramesPlayer('./frames2.dat',20)
 #播放
 player.play()
