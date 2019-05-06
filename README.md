@@ -64,4 +64,8 @@ CharAnimePlayer.newRawPlayer(filename,fps,width,height))
 player.play()
 ```
 
-在linux下测试通过，windows可能有些地方要改改(比如路径)
+#### 样例 (Bad Apple)
+```
+./CharAnimePlayer.py bad-apple.mp4  80 120 35
+```
+![](demo2.gif)
