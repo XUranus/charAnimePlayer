@@ -13,6 +13,8 @@ python jinitaimei.py
 ### 需要：
  - python3
  - opencv
+ - pygame（可选）
+ - moviepy（可选）
 
 ### 原理
 用opencv读取视频帧，压缩，灰化，构造灰度字符串，用字符串替换每个像素。
@@ -55,8 +57,11 @@ player.play()
 
 shell
 ```shell
-python CharAnimePlayer.py [movie] [fps] [width] [height]
+python CharAnimePlayer.py [movie] [fps] [width] [height] [--audio]
 ```
+当附带`--audio`时，可以开启声音（**尚未解决音画同步的问题**），需要额外的库：
+ - moviepy
+ - pygame
 
 python
 ```python
@@ -66,6 +71,6 @@ player.play()
 
 #### 样例 (Bad Apple)
 ```
-./CharAnimePlayer.py bad-apple.mp4  80 120 35
+./CharAnimePlayer.py bad-apple.mp4 80 120 35 --audio
 ```
 ![](demo2.gif)
