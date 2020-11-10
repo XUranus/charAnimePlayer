@@ -14,54 +14,41 @@
 ## 样例
 在终端播放“鸡你太美”
 ```bash
-python jinitaimei.py
+python charAnimePlayer.py jinitaimei2.dat -fps 20 #每秒20帧
 ```
 效果如下：
 ![](demo.gif)
 
 
 ## 即时播放
-播放指定的任意**mp4**文件：
+播放指定的**mp4**文件：
 ```bash
-python CharAnimePlayer.py [movie] [fps] [width] [height] [--audio]
+python charAnimePlayer.py <file> [option]
 ```
-样例 (Bad Apple):
+选项:`-width`,`-height`,`-fps`设置宽高与帧率，还需带上`--raw`。
+
+Bad Apple样例（50帧，宽70字符，高35字符）:
 ```
-./CharAnimePlayer.py bad-apple.mp4 60 120 35 --audio
+python charAnimePlayer.py -fps 50 -width 70 -height 35 bad-apple.mp4 --raw
 ```
 ![](demo2.gif)
 
-> 当附带`--audio`时，可以开启声音（**尚未解决音画同步的问题**）。
+> 当附带`--audio`选项时，可以开启声音（**尚未解决音画同步的问题**）。
 
-> 该种播放方式是一边转化帧为灰度字符串，一边播放，配置不行的可能会卡。建议用该种模式调试适合你的屏幕的宽高以及帧率，然后选用下面预处理再播放的方式获得更流畅的体验。
+> **该种播放方式是一边转化每一帧为灰度字符串，一边播放，配置不行电脑的可能会卡**。建议用该种模式调试适合你的屏幕的宽高以及帧率，然后选用下面**预处理播放**的方式获得更流畅的体验。
+
+> `fps`,`width`,`height`需要根据自己的电脑调试。`fps`设置在1-60内，`width`和`height`是指宽高的字符数，建议不要超过100
 
 ## 预处理播放
-对于一个`ikun.mp4`文件预处理播放的方式如下:
+为解决即时播放的卡顿问题，可以使用预处理播放。预处理后生成的预处理文件不需要依赖其他库也能播放。
 
-1. clone该repo，导入文件
-```python
-import sys
-sys.path.append('./')
-from CharAnimeBuilder import *
-from CharAnimePlayer import *
+对于一个`bad-apple.mp4`文件预处理播放的方式如下:
 ```
-2. 生成预处理文件
-```python
-arr =  "@@@@@@@@@*abcdefghijklmnopqrstuvwxyz<>()\/{}[]? " #构造合适的灰度字符串
-builder = CharAnimeBuilder(arr,'ikun.mp4') 
-width = 130 #输入宽高
-height = 40 
-builder.build(width, height, './ikun.dat') #生成预处理文件路径
+python3 charAnimeBuilder.py bad-apple.mp4 -width 100 -height 100 -o bad-apple.dat
+```
+预处理需要设置宽高，输出路径。完成后会生成`bad-apple.dat`预处理文件，然后直接用它播放：
+```
+python charAnimePlayer.py bad-apple.dat -fps 50
 ```
 
-3. 此时目录下已经出现了`ikun.dat`的预处理文件，加载该文件,设置帧率，初始化播放器
-```python
-fps = 20 #帧率 根据自己卡不卡来调节 范围1-60
-player = CharAnimePlayer.newFramesPlayer('./ikun.dat',fps) #载入之前的ikun.dat文件
-```
-
-4. 播放
-```python
-player.play()
-```
-
+播放预处理文件任可以指定帧率，但不可以设置宽高和播放声音了。
