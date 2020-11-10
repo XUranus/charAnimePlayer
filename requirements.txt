@@ -1,0 +1,3 @@
+opencv_contrib_python==4.2.0.34
+pygame==2.0.0
+moviepy==1.0.3

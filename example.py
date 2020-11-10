@@ -6,8 +6,7 @@ from CharAnimePlayer import *
 
 
 #构造灰度字符串
-a =  "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'.
-                     "
+a =  "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'.    "
 #构造builder 传入视频
 builder = CharAnimeBuilder(a,'ikun.mp4') 
 
